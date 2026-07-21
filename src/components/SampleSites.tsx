@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { SAMPLE_SITES, type SampleSite, type SampleTheme } from "../data/site";
 
@@ -15,11 +15,105 @@ function themeStyle(t: SampleTheme): CSSProperties {
   } as CSSProperties;
 }
 
-/* A self-contained, themed mock of a small-business site — pure CSS/markup, no
-   external assets. `full` adds the extra sections shown in the modal so visitors
-   see the range of UI elements we can build (stats, gallery, testimonial, CTA). */
+/* Per-industry line-art motifs — self-hosted vector "imagery" that matches each
+   theme (drawn in currentColor so it inherits white on the colored panels). */
+const MOTIFS: Record<string, ReactNode> = {
+  cafe: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 10h11v4a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4v-4Z" />
+      <path d="M16 11h2.2a2.3 2.3 0 0 1 0 4.6H16" />
+      <path d="M8 6.5c.8-1 .8-1.8 0-2.8M11.5 6.5c.8-1 .8-1.8 0-2.8" />
+    </g>
+  ),
+  salon: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="7" cy="17" r="2.3" />
+      <circle cx="7" cy="7" r="2.3" />
+      <path d="M8.8 8.4 20 16M8.8 15.6 20 8" />
+    </g>
+  ),
+  law: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 9 12 4l8 5" />
+      <path d="M5 9v9M19 9v9M9 10v7M15 10v7M12 10v7" />
+      <path d="M4 20h16" />
+    </g>
+  ),
+  fitness: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 12h10" />
+      <path d="M5 9v6M7 8v8M17 8v8M19 9v6" />
+    </g>
+  ),
+  photo: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="8" width="18" height="12" rx="2.5" />
+      <circle cx="12" cy="14" r="3.2" />
+      <path d="M8.5 8l1.4-2.2h4.2L15.5 8" />
+    </g>
+  ),
+  landscape: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 20v-5" />
+      <path d="M12 4 7.5 11h9L12 4Z" />
+      <path d="M12 9l-3.5 6h7L12 9Z" />
+      <path d="M4 20h16" />
+    </g>
+  ),
+  realty: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 11 12 4l8 7" />
+      <path d="M6 10.5V20h12v-9.5" />
+      <path d="M10.5 20v-5h3v5" />
+    </g>
+  ),
+  boutique: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 8h10l1 11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L7 8Z" />
+      <path d="M9.3 8a2.7 2.7 0 0 1 5.4 0" />
+    </g>
+  ),
+  dental: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7.5 4.6C5.7 5 4.8 6.7 5.2 9c.3 1.7.7 3.4 1.2 5 .4 1.3.8 2.6 1.3 3.8.5 1.1 1.6.9 1.8-.3l.6-3.3c.1-.7 1-.7 1.1 0l.6 3.3c.2 1.2 1.3 1.4 1.8.3.5-1.2.9-2.5 1.3-3.8.5-1.6.9-3.3 1.2-5 .4-2.3-.5-4-2.3-4.4-1.3-.3-2 .4-3 .4s-1.7-.7-3-.4Z" />
+    </g>
+  ),
+  agency: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3.5 13.7 9.8 20 11.5l-6.3 1.7L12 19.5l-1.7-6.3L4 11.5l6.3-1.7L12 3.5Z" />
+      <path d="M18.5 4.5v3M20 6h-3" />
+    </g>
+  ),
+};
+
+const motifFor = (id: string): ReactNode => MOTIFS[id] ?? MOTIFS.agency;
+
+/* A photo-style gallery of themed "shots" — alternating colored panels, some with
+   the industry motif, some with a soft bokeh cluster, to read like real imagery. */
+function Shots({ id, count }: { id: string; count: number }) {
+  const motif = motifFor(id);
+  return (
+    <div className="mock-shots" aria-hidden="true">
+      {Array.from({ length: count }).map((_, i) => (
+        <span key={i} className={`mock-shot ${i % 2 === 0 ? "shot-a" : "shot-b"}`}>
+          {i % 3 === 1 ? (
+            <span className="shot-bokeh" />
+          ) : (
+            <svg className="shot-motif" viewBox="0 0 24 24">
+              {motif}
+            </svg>
+          )}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/* A self-contained, themed mock of a small-business site — designed to look like a
+   real, polished website: an image-style hero, a photo gallery, stats, and reviews.
+   Pure CSS/SVG, no external assets. `full` adds the extra sections in the modal. */
 function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean }) {
-  const { hero, features, nav, name, summary, stats, testimonial } = sample;
+  const { hero, features, nav, name, stats, testimonial, id } = sample;
   return (
     <div className="mock" style={themeStyle(sample.theme)} data-variant={full ? "full" : "preview"}>
       <div className="mock-topbar">
@@ -29,16 +123,29 @@ function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean
             <span key={n}>{n}</span>
           ))}
         </nav>
+        <span className="mock-navcta" aria-hidden="true">
+          {nav[nav.length - 1]}
+        </span>
       </div>
 
       <div className="mock-hero">
-        <span className="mock-eyebrow">{hero.eyebrow}</span>
-        <p className="mock-h">{hero.heading}</p>
-        <p className="mock-sub">{hero.sub}</p>
-        <span className="mock-hero-actions">
-          <span className="mock-btn">{hero.cta}</span>
-          <span className="mock-btn ghost">{nav[0]}</span>
-        </span>
+        <div className="mock-hero-copy">
+          <span className="mock-stars" aria-hidden="true">
+            <span className="s">★★★★★</span> Loved locally
+          </span>
+          <span className="mock-eyebrow">{hero.eyebrow}</span>
+          <p className="mock-h">{hero.heading}</p>
+          <p className="mock-sub">{hero.sub}</p>
+          <span className="mock-hero-actions">
+            <span className="mock-btn">{hero.cta}</span>
+            <span className="mock-btn ghost">{nav[0]}</span>
+          </span>
+        </div>
+        <div className="mock-art" aria-hidden="true">
+          <svg className="mock-art-motif" viewBox="0 0 24 24">
+            {motifFor(id)}
+          </svg>
+        </div>
       </div>
 
       <div className="mock-stats" aria-hidden="true">
@@ -50,23 +157,10 @@ function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean
         ))}
       </div>
 
-      {full && (
-        <div className="mock-split">
-          <div className="mock-about">
-            <p className="mock-kicker">About us</p>
-            <p className="mock-body">{summary}</p>
-            <p className="mock-body mock-dim">
-              Every section here is a starting point — your copy, colors, and photos
-              drop right in.
-            </p>
-          </div>
-          <div className="mock-gallery" aria-hidden="true">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <span key={i} className={`mock-tile tile-${i % 3}`} />
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="mock-block">
+        <p className="mock-kicker">Featured work</p>
+        <Shots id={id} count={full ? 6 : 3} />
+      </div>
 
       <div className="mock-features">
         {features.map((f) => (
