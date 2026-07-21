@@ -88,6 +88,13 @@ export const CUSTOMER_RESPONSIBILITIES = [
   "Reviewing legal, regulated, or industry-specific content before publication",
 ];
 
-// Optional contact endpoint. Empty by default → the form simulates success
-// client-side and posts nothing. No secrets are ever embedded here.
-export const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT ?? "";
+// Where contact enquiries go. Shown on the page and used as the mailto fallback
+// when no HTTP endpoint is configured. This is a public inbox address, not a secret.
+export const CONTACT_EMAIL = "bpbrinson@brinovax.com";
+
+// Contact endpoint. Submissions POST here and are emailed to CONTACT_EMAIL via
+// SES (API Gateway + Lambda; infra in shared/contact). This is a public URL — the
+// browser calls it directly, so it is not a secret. VITE_CONTACT_ENDPOINT overrides
+// it (e.g. "" to fall back to the mailto flow, or a different environment's API).
+const DEFAULT_CONTACT_ENDPOINT = "https://0pt6gm3xq5.execute-api.us-east-1.amazonaws.com/contact";
+export const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT ?? DEFAULT_CONTACT_ENDPOINT;

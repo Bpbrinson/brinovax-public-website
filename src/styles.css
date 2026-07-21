@@ -102,6 +102,8 @@ a { color: var(--brand); }
 .contact-form { display: grid; gap: 1.1rem; max-width: 560px; }
 .field { display: grid; gap: 0.35rem; }
 .field label { font-weight: 700; }
+.field-hint { font-weight: 400; color: var(--muted); font-size: 0.85rem; }
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .field input, .field textarea { font: inherit; padding: 0.65rem 0.8rem; border: 1px solid var(--border); border-radius: 10px; background: #fff; color: var(--text); }
 .field input:focus, .field textarea:focus { outline: 2px solid var(--brand); border-color: var(--brand); }
 .field-error { color: var(--bad); font-size: 0.88rem; margin: 0; }
