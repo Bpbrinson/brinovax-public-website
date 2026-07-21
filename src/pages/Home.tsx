@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { STEPS } from "../data/site";
 import { usePageTitle } from "../hooks/usePageTitle";
+import SampleSites from "../components/SampleSites";
 
 /* Small inline stroke icons — no external assets, crisp on every screen. */
 const icon = {
@@ -22,6 +23,27 @@ const icon = {
       <circle cx="12" cy="12" r="3" />
     </svg>
   ),
+  tag: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20 12 12 20l-8-8V4h8l8 8Z" />
+      <circle cx="8.5" cy="8.5" r="1.4" />
+    </svg>
+  ),
+  sparkle: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" />
+    </svg>
+  ),
+  chat: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12Z" />
+    </svg>
+  ),
+  refresh: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 12a9 9 0 1 1-2.6-6.4M21 3v5h-5" />
+    </svg>
+  ),
   globe: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <circle cx="12" cy="12" r="9" />
@@ -32,18 +54,6 @@ const icon = {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="4" y="10" width="16" height="11" rx="2" />
       <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-    </svg>
-  ),
-  refresh: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M21 12a9 9 0 1 1-2.6-6.4M21 3v5h-5" />
-    </svg>
-  ),
-  headset: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M4 13v-1a8 8 0 0 1 16 0v1" />
-      <path d="M4 13a2 2 0 0 1 2 2v2a2 2 0 0 1-4 0v-2M20 13a2 2 0 0 0-2 2v2a2 2 0 0 0 4 0v-2" />
-      <path d="M18 19a4 4 0 0 1-4 3h-2" />
     </svg>
   ),
 };
@@ -71,31 +81,31 @@ function Value({ svg, title, children }: { svg: ReactNode; title: string; childr
 }
 
 export default function Home() {
-  usePageTitle("Fast, secure website hosting");
+  usePageTitle("Affordable, managed website hosting");
   return (
     <>
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">Managed website hosting</p>
+            <p className="eyebrow">Affordable managed website hosting</p>
             <h1>Your business website, built and hosted the right way.</h1>
             <p className="lede">
-              Brinovax builds fast, secure websites and hosts them on AWS — private
-              storage behind a global CDN, HTTPS, and your own custom domain. You review
-              every change before it goes live, and it stays surprisingly affordable.
+              Brinovax builds fast, secure websites and hosts them on AWS — at prices small
+              businesses can actually afford. You review every change before it goes live,
+              and our AI helps make edits fast while you stay in control.
             </p>
             <div className="cta-row">
               <Link className="btn btn-primary" to="/contact">
                 Get started
               </Link>
-              <Link className="btn btn-ghost" to="/how-it-works">
-                See how it works
-              </Link>
+              <a className="btn btn-ghost" href="#ideas">
+                Browse design ideas
+              </a>
             </div>
             <div className="pill-row">
-              <span className="pill">{icon.lock} HTTPS &amp; custom domain</span>
-              <span className="pill">{icon.globe} Global CDN</span>
-              <span className="pill">{icon.eye} Preview before launch</span>
+              <span className="pill pill-accent">{icon.tag} Small-business pricing</span>
+              <span className="pill">{icon.sparkle} AI-assisted edits</span>
+              <span className="pill">{icon.chat} Quick support</span>
             </div>
           </div>
 
@@ -130,7 +140,7 @@ export default function Home() {
           <h2 className="section-title">Everything a small business needs to be online</h2>
           <p className="section-sub">
             Professional hosting without the cloud complexity — set up for you and kept
-            running behind the scenes.
+            running behind the scenes, for a price that fits a small-business budget.
           </p>
         </div>
         <div className="feature-grid">
@@ -149,30 +159,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="band">
-        <div className="container section">
-          <div className="section-head">
-            <h2 className="section-title">Why small businesses choose Brinovax</h2>
-            <p className="section-sub">Enterprise-grade foundations, priced for small teams.</p>
-          </div>
-          <div className="value-grid">
-            <Value svg={icon.globe} title="Enterprise infrastructure">
-              The same AWS foundation big companies use — global CDN, private storage, and
-              managed certificates.
-            </Value>
-            <Value svg={icon.refresh} title="Reversible by design">
-              Deployments are versioned. If something is not right, we roll back to the last
-              approved version quickly.
-            </Value>
-            <Value svg={icon.lock} title="Secure & monitored">
-              HTTPS everywhere, private buckets, and health checks watching your site so
-              issues surface early.
-            </Value>
-            <Value svg={icon.headset} title="Friendly, human support">
-              Talk to a real person. We handle the technical side so you can focus on your
-              business.
-            </Value>
-          </div>
+      <SampleSites />
+
+      <section className="container section">
+        <div className="section-head">
+          <h2 className="section-title">Why small businesses choose Brinovax</h2>
+          <p className="section-sub">Enterprise-grade foundations, priced for small teams.</p>
+        </div>
+        <div className="value-grid">
+          <Value svg={icon.tag} title="Genuinely affordable">
+            Small-business pricing with no surprise fees — enterprise-grade hosting without
+            the enterprise bill.
+          </Value>
+          <Value svg={icon.sparkle} title="AI edits, you're in control">
+            Request a change and our AI drafts it fast. Nothing goes live until you review
+            and approve it — every edit is previewed and reversible.
+          </Value>
+          <Value svg={icon.chat} title="Quick, friendly support">
+            Talk to a real person and get fast answers when you need a hand — no ticket
+            mazes, no call centers.
+          </Value>
+          <Value svg={icon.refresh} title="Reversible & monitored">
+            Versioned deploys with health checks watching your site, so we can roll back to
+            the last approved version anytime.
+          </Value>
         </div>
       </section>
 
