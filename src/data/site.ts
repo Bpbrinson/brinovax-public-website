@@ -88,7 +88,7 @@ export const CUSTOMER_RESPONSIBILITIES = [
   "Reviewing legal, regulated, or industry-specific content before publication",
 ];
 
-// Where contact enquiries go. Shown on the page and used as the mailto fallback
+// Where contact inquiries go. Shown on the page and used as the mailto fallback
 // when no HTTP endpoint is configured. This is a public inbox address, not a secret.
 export const CONTACT_EMAIL = "bpbrinson@brinovax.com";
 

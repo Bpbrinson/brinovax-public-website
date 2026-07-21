@@ -32,10 +32,10 @@ export function validate(values: ContactValues): Errors {
   return errors;
 }
 
-// Builds a mailto: link addressed to CONTACT_EMAIL with the enquiry prefilled.
-// Used when no HTTP endpoint is configured, so enquiries reach us with zero backend.
+// Builds a mailto: link addressed to CONTACT_EMAIL with the inquiry prefilled.
+// Used when no HTTP endpoint is configured, so inquiries reach us with zero backend.
 export function buildMailto(values: ContactValues): string {
-  const subject = `Website enquiry from ${values.name.trim()}`;
+  const subject = `Website inquiry from ${values.name.trim()}`;
   const bodyLines = [
     `Name: ${values.name.trim()}`,
     `Email: ${values.email.trim()}`,
@@ -71,7 +71,7 @@ export default function Contact() {
     setStatus("submitting");
     try {
       if (CONTACT_ENDPOINT) {
-        // A real endpoint is wired up → POST the enquiry so it emails automatically.
+        // A real endpoint is wired up → POST the inquiry so it emails automatically.
         // No secrets are ever sent from the browser.
         const res = await fetch(CONTACT_ENDPOINT, {
           method: "POST",

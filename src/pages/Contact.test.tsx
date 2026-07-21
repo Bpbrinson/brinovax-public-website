@@ -53,7 +53,7 @@ describe("contact form validation", () => {
     expect(screen.getByText(/valid email/i)).toBeInTheDocument();
   });
 
-  it("POSTs the enquiry (with the honeypot field) and confirms success", async () => {
+  it("POSTs the inquiry (with the honeypot field) and confirms success", async () => {
     const fetchMock = vi
       .fn()
       .mockResolvedValue({ ok: true, status: 200, json: async () => ({ ok: true }) });
