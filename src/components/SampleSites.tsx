@@ -109,97 +109,231 @@ function Shots({ id, count }: { id: string; count: number }) {
   );
 }
 
-/* A self-contained, themed mock of a small-business site — designed to look like a
-   real, polished website: an image-style hero, a photo gallery, stats, and reviews.
-   Pure CSS/SVG, no external assets. `full` adds the extra sections in the modal. */
-function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean }) {
-  const { hero, features, nav, name, stats, testimonial, id } = sample;
+/* ---- shared mock building blocks ---- */
+function MockTopbar({ sample, ghost = false }: { sample: SampleSite; ghost?: boolean }) {
   return (
-    <div className="mock" style={themeStyle(sample.theme)} data-variant={full ? "full" : "preview"}>
-      <div className="mock-topbar">
-        <span className="mock-logo">{name}</span>
-        <nav className="mock-nav" aria-hidden="true">
-          {nav.map((n) => (
-            <span key={n}>{n}</span>
-          ))}
-        </nav>
-        <span className="mock-navcta" aria-hidden="true">
-          {nav[nav.length - 1]}
+    <div className={ghost ? "mock-topbar tb-ghost" : "mock-topbar"}>
+      <span className="mock-logo">{sample.name}</span>
+      <nav className="mock-nav" aria-hidden="true">
+        {sample.nav.map((n) => (
+          <span key={n}>{n}</span>
+        ))}
+      </nav>
+      <span className="mock-navcta" aria-hidden="true">
+        {sample.nav[sample.nav.length - 1]}
+      </span>
+    </div>
+  );
+}
+
+function MockStars() {
+  return (
+    <span className="mock-stars" aria-hidden="true">
+      <span className="s">★★★★★</span> Loved locally
+    </span>
+  );
+}
+
+function MockActions({ sample, glass = false }: { sample: SampleSite; glass?: boolean }) {
+  return (
+    <span className="mock-hero-actions">
+      <span className={glass ? "mock-btn glass" : "mock-btn"}>{sample.hero.cta}</span>
+      <span className={glass ? "mock-btn glass ghost" : "mock-btn ghost"}>{sample.nav[0]}</span>
+    </span>
+  );
+}
+
+function MockStats({ sample }: { sample: SampleSite }) {
+  return (
+    <div className="mock-stats" aria-hidden="true">
+      {sample.stats.map((s) => (
+        <div key={s.label} className="mock-stat">
+          <strong>{s.value}</strong>
+          <span>{s.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MockFeatures({ sample }: { sample: SampleSite }) {
+  return (
+    <div className="mock-features">
+      {sample.features.map((f) => (
+        <div key={f.title} className="mock-card">
+          <span className="mock-card-icon" aria-hidden="true" />
+          <strong>{f.title}</strong>
+          <span className="mock-body">{f.body}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MockGallery({ sample, count }: { sample: SampleSite; count: number }) {
+  return (
+    <div className="mock-block">
+      <p className="mock-kicker">Featured work</p>
+      <Shots id={sample.id} count={count} />
+    </div>
+  );
+}
+
+function MockQuoteCta({ sample }: { sample: SampleSite }) {
+  const { hero, nav, testimonial } = sample;
+  return (
+    <>
+      <figure className="mock-quote">
+        <blockquote>“{testimonial.quote}”</blockquote>
+        <figcaption>
+          <span className="mock-avatar" aria-hidden="true">
+            {testimonial.name.charAt(0)}
+          </span>
+          <span>
+            <strong>{testimonial.name}</strong>
+            {testimonial.role && <span className="mock-body"> · {testimonial.role}</span>}
+          </span>
+        </figcaption>
+      </figure>
+      <div className="mock-cta">
+        <div>
+          <strong>{hero.heading}</strong>
+          <span className="mock-body">Ready when you are.</span>
+        </div>
+        <span className="mock-btn">{nav[nav.length - 1]}</span>
+      </div>
+    </>
+  );
+}
+
+/* ---- layout-specific heroes ---- */
+function HeroSplit({ sample }: { sample: SampleSite }) {
+  return (
+    <div className="mock-hero mh-split">
+      <div className="mock-hero-copy">
+        <MockStars />
+        <span className="mock-eyebrow">{sample.hero.eyebrow}</span>
+        <p className="mock-h">{sample.hero.heading}</p>
+        <p className="mock-sub">{sample.hero.sub}</p>
+        <MockActions sample={sample} />
+      </div>
+      <div className="mock-art" aria-hidden="true">
+        <svg className="mock-art-motif" viewBox="0 0 24 24">
+          {motifFor(sample.id)}
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+function HeroCentered({ sample }: { sample: SampleSite }) {
+  return (
+    <div className="mock-hero mh-centered">
+      <span className="mock-badge">✦ {sample.hero.eyebrow}</span>
+      <p className="mock-h mock-h-grad">{sample.hero.heading}</p>
+      <p className="mock-sub">{sample.hero.sub}</p>
+      <MockActions sample={sample} />
+      <div className="mock-screenshot">
+        <span className="mss-glow" aria-hidden="true" />
+        <div className="mss-frame">
+          <span className="mss-bar">
+            <i />
+            <i />
+            <i />
+          </span>
+          <div className="mss-body">
+            <div className="mss-hero">
+              <svg viewBox="0 0 24 24" className="mss-motif">
+                {motifFor(sample.id)}
+              </svg>
+            </div>
+            <div className="mss-cards">
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HeroAurora({ sample }: { sample: SampleSite }) {
+  return (
+    <div className="mock-hero mh-aurora">
+      <span className="aurora a1" aria-hidden="true" />
+      <span className="aurora a2" aria-hidden="true" />
+      <span className="aurora a3" aria-hidden="true" />
+      <div className="mh-aurora-content">
+        <MockStars />
+        <span className="mock-eyebrow">{sample.hero.eyebrow}</span>
+        <p className="mock-h">{sample.hero.heading}</p>
+        <p className="mock-sub">{sample.hero.sub}</p>
+        <MockActions sample={sample} glass />
+      </div>
+    </div>
+  );
+}
+
+function HeroPortfolio({ sample }: { sample: SampleSite }) {
+  const motif = motifFor(sample.id);
+  return (
+    <div className="mock-hero-portfolio">
+      <div className="mp-grid" aria-hidden="true">
+        <span className="mp-tile big shot-a">
+          <svg viewBox="0 0 24 24" className="shot-motif">
+            {motif}
+          </svg>
+        </span>
+        <span className="mp-tile shot-b">
+          <span className="shot-bokeh" />
+        </span>
+        <span className="mp-tile shot-a">
+          <svg viewBox="0 0 24 24" className="shot-motif">
+            {motif}
+          </svg>
         </span>
       </div>
-
-      <div className="mock-hero">
-        <div className="mock-hero-copy">
-          <span className="mock-stars" aria-hidden="true">
-            <span className="s">★★★★★</span> Loved locally
-          </span>
-          <span className="mock-eyebrow">{hero.eyebrow}</span>
-          <p className="mock-h">{hero.heading}</p>
-          <p className="mock-sub">{hero.sub}</p>
-          <span className="mock-hero-actions">
-            <span className="mock-btn">{hero.cta}</span>
-            <span className="mock-btn ghost">{nav[0]}</span>
-          </span>
-        </div>
-        <div className="mock-art" aria-hidden="true">
-          <svg className="mock-art-motif" viewBox="0 0 24 24">
-            {motifFor(id)}
-          </svg>
-        </div>
+      <div className="mp-card">
+        <span className="mock-eyebrow">{sample.hero.eyebrow}</span>
+        <p className="mock-h">{sample.hero.heading}</p>
+        <p className="mock-sub">{sample.hero.sub}</p>
+        <MockActions sample={sample} />
       </div>
+    </div>
+  );
+}
 
-      <div className="mock-stats" aria-hidden="true">
-        {stats.map((s) => (
-          <div key={s.label} className="mock-stat">
-            <strong>{s.value}</strong>
-            <span>{s.label}</span>
-          </div>
-        ))}
-      </div>
+/* A themed mock site with a layout-specific structure so the designs don't all look
+   alike. Pure CSS/SVG, no external assets. `full` adds the modal-only sections. */
+function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean }) {
+  const { layout } = sample;
+  return (
+    <div
+      className="mock"
+      data-layout={layout}
+      data-variant={full ? "full" : "preview"}
+      style={themeStyle(sample.theme)}
+    >
+      <MockTopbar sample={sample} ghost={layout === "aurora"} />
+      {layout === "split" && <HeroSplit sample={sample} />}
+      {layout === "centered" && <HeroCentered sample={sample} />}
+      {layout === "aurora" && <HeroAurora sample={sample} />}
+      {layout === "portfolio" && <HeroPortfolio sample={sample} />}
+      <MockStats sample={sample} />
+      {layout !== "portfolio" && <MockGallery sample={sample} count={full ? 6 : 3} />}
+      <MockFeatures sample={sample} />
+      {full && <MockQuoteCta sample={sample} />}
+      <MockFooter sample={sample} />
+    </div>
+  );
+}
 
-      <div className="mock-block">
-        <p className="mock-kicker">Featured work</p>
-        <Shots id={id} count={full ? 6 : 3} />
-      </div>
-
-      <div className="mock-features">
-        {features.map((f) => (
-          <div key={f.title} className="mock-card">
-            <span className="mock-card-icon" aria-hidden="true" />
-            <strong>{f.title}</strong>
-            <span className="mock-body">{f.body}</span>
-          </div>
-        ))}
-      </div>
-
-      {full && (
-        <>
-          <figure className="mock-quote">
-            <blockquote>“{testimonial.quote}”</blockquote>
-            <figcaption>
-              <span className="mock-avatar" aria-hidden="true">
-                {testimonial.name.charAt(0)}
-              </span>
-              <span>
-                <strong>{testimonial.name}</strong>
-                {testimonial.role && <span className="mock-body"> · {testimonial.role}</span>}
-              </span>
-            </figcaption>
-          </figure>
-
-          <div className="mock-cta">
-            <div>
-              <strong>{hero.heading}</strong>
-              <span className="mock-body">Ready when you are.</span>
-            </div>
-            <span className="mock-btn">{nav[nav.length - 1]}</span>
-          </div>
-        </>
-      )}
-
-      <div className="mock-footer" aria-hidden="true">
-        © {name}
-      </div>
+function MockFooter({ sample }: { sample: SampleSite }) {
+  return (
+    <div className="mock-footer" aria-hidden="true">
+      © {sample.name}
     </div>
   );
 }

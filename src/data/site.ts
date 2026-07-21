@@ -114,11 +114,17 @@ export interface SampleTheme {
   font: "sans" | "serif";
 }
 
+export type SampleLayout = "split" | "centered" | "aurora" | "portfolio";
+
 export interface SampleSite {
   id: string;
   name: string;
   category: string;
   summary: string;
+  // Each sample renders a structurally different layout so the designs don't all
+  // look alike: split (text + side image), centered (hero + screenshot + glow),
+  // aurora (full-bleed animated background), portfolio (gallery-first).
+  layout: SampleLayout;
   nav: string[];
   hero: { eyebrow: string; heading: string; sub: string; cta: string };
   stats: { value: string; label: string }[];
@@ -133,6 +139,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Bloom Café",
     category: "Café & Bakery",
     summary: "Warm, inviting, and made for menus, hours, and mouth-watering photos.",
+    layout: "split",
     nav: ["Menu", "Our Story", "Visit", "Order"],
     hero: {
       eyebrow: "Fresh daily",
@@ -161,6 +168,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Luxe Hair Studio",
     category: "Salon & Beauty",
     summary: "Elegant and photo-forward, built to show off your work and take bookings.",
+    layout: "portfolio",
     nav: ["Services", "Gallery", "Team", "Book"],
     hero: {
       eyebrow: "By appointment",
@@ -189,6 +197,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Summit Legal",
     category: "Law & Professional",
     summary: "Trustworthy and understated — credibility first, with clear calls to action.",
+    layout: "centered",
     nav: ["Practice", "Attorneys", "Results", "Contact"],
     hero: {
       eyebrow: "Trusted counsel",
@@ -217,6 +226,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Pulse Fitness",
     category: "Gym & Fitness",
     summary: "Bold, high-energy dark theme designed to drive sign-ups and class bookings.",
+    layout: "aurora",
     nav: ["Classes", "Coaches", "Pricing", "Join"],
     hero: {
       eyebrow: "Train with intent",
@@ -245,6 +255,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Lens & Light",
     category: "Photography",
     summary: "Minimal, gallery-first layout that lets the imagery do the talking.",
+    layout: "portfolio",
     nav: ["Work", "About", "Services", "Inquire"],
     hero: {
       eyebrow: "Portfolio",
@@ -273,6 +284,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "GreenScape",
     category: "Landscaping & Home",
     summary: "Fresh and dependable, built to showcase projects and capture quote requests.",
+    layout: "split",
     nav: ["Services", "Projects", "Reviews", "Quote"],
     hero: {
       eyebrow: "Design • Build • Maintain",
@@ -301,6 +313,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Cedar & Co Realty",
     category: "Real Estate",
     summary: "Polished and trust-building, with room for listings, neighborhoods, and agents.",
+    layout: "centered",
     nav: ["Listings", "Buy", "Sell", "Contact"],
     hero: {
       eyebrow: "Local experts",
@@ -329,6 +342,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Marlo Boutique",
     category: "Retail & E-commerce",
     summary: "Playful and product-forward, built to browse collections and drive sales.",
+    layout: "portfolio",
     nav: ["Shop", "New In", "Lookbook", "Cart"],
     hero: {
       eyebrow: "New arrivals",
@@ -357,6 +371,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Bright Smile Dental",
     category: "Dental & Medical",
     summary: "Clean and calming, designed to build trust and make booking effortless.",
+    layout: "centered",
     nav: ["Services", "New Patients", "Insurance", "Book"],
     hero: {
       eyebrow: "Gentle care",
@@ -385,6 +400,7 @@ export const SAMPLE_SITES: SampleSite[] = [
     name: "Northwind Studio",
     category: "Creative Agency",
     summary: "Modern and vibrant, made to showcase work and win new projects.",
+    layout: "aurora",
     nav: ["Work", "Services", "About", "Start"],
     hero: {
       eyebrow: "Brand & web",
