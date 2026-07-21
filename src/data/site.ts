@@ -4,6 +4,7 @@
 export const NAV = [
   { to: "/", label: "Home" },
   { to: "/how-it-works", label: "How it works" },
+  { to: "/examples", label: "Examples" },
   { to: "/pricing", label: "Pricing" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
@@ -101,7 +102,7 @@ export const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT ?? DEFAULT
 
 // Sample designs shown in the "design ideas" carousel. Each is a self-contained
 // theme (no external assets) rendered as a mini mock site the visitor can click
-// through for inspiration. Prices/claims are illustrative placeholder content.
+// through for inspiration. Stats, quotes, and prices are illustrative placeholders.
 export interface SampleTheme {
   bg: string;
   surface: string;
@@ -120,7 +121,9 @@ export interface SampleSite {
   summary: string;
   nav: string[];
   hero: { eyebrow: string; heading: string; sub: string; cta: string };
+  stats: { value: string; label: string }[];
   features: { title: string; body: string }[];
+  testimonial: { quote: string; name: string; role: string };
   theme: SampleTheme;
 }
 
@@ -137,11 +140,17 @@ export const SAMPLE_SITES: SampleSite[] = [
       sub: "Locally roasted beans and fresh-baked pastries in the heart of downtown.",
       cta: "View the menu",
     },
+    stats: [
+      { value: "4.9★", label: "Avg. review" },
+      { value: "12", label: "Signature drinks" },
+      { value: "7am", label: "Open daily" },
+    ],
     features: [
       { title: "Seasonal menu", body: "Rotating espresso, pour-overs, and house pastries." },
       { title: "Cozy space", body: "Free Wi-Fi, warm light, and room to linger." },
       { title: "Order ahead", body: "Skip the line — pick up on your schedule." },
     ],
+    testimonial: { quote: "The cozy spot I start every morning at.", name: "Jordan M.", role: "Regular" },
     theme: {
       bg: "#fbf6ee", surface: "#f2e6d5", primary: "#b5651d", primary2: "#d98b3a",
       accent: "#2f7d5b", text: "#3a2b20", muted: "#8a7563", font: "serif",
@@ -159,11 +168,17 @@ export const SAMPLE_SITES: SampleSite[] = [
       sub: "Precision cuts, color, and styling from an award-winning team.",
       cta: "Book your visit",
     },
+    stats: [
+      { value: "4.9★", label: "Client rating" },
+      { value: "1.2k+", label: "Happy clients" },
+      { value: "6", label: "Expert stylists" },
+    ],
     features: [
       { title: "Signature color", body: "Balayage, gloss, and dimensional highlights." },
       { title: "Expert stylists", body: "A team obsessed with the details." },
       { title: "Easy booking", body: "Reserve online in under a minute." },
     ],
+    testimonial: { quote: "I've never loved my color more.", name: "Priya S.", role: "Client" },
     theme: {
       bg: "#faf6f7", surface: "#f0e4ea", primary: "#b23a6a", primary2: "#7a2450",
       accent: "#caa15a", text: "#2a1f27", muted: "#7d6b74", font: "serif",
@@ -181,11 +196,17 @@ export const SAMPLE_SITES: SampleSite[] = [
       sub: "Straightforward legal guidance for individuals and small businesses.",
       cta: "Request a consultation",
     },
+    stats: [
+      { value: "25+", label: "Years experience" },
+      { value: "98%", label: "Client satisfaction" },
+      { value: "500+", label: "Clients served" },
+    ],
     features: [
       { title: "Practice areas", body: "Business, estate, and real-estate law." },
       { title: "Proven results", body: "Decades of outcomes clients rely on." },
       { title: "Direct access", body: "Talk to your attorney, not a call center." },
     ],
+    testimonial: { quote: "Clear guidance exactly when I needed it.", name: "D. Nguyen", role: "Client" },
     theme: {
       bg: "#f6f8fb", surface: "#e7eef7", primary: "#1f3a5f", primary2: "#2f5c8f",
       accent: "#b08d4c", text: "#16202e", muted: "#5b6675", font: "serif",
@@ -203,11 +224,17 @@ export const SAMPLE_SITES: SampleSite[] = [
       sub: "Coached classes, open gym, and programs for every level.",
       cta: "Start free trial",
     },
+    stats: [
+      { value: "40+", label: "Weekly classes" },
+      { value: "15", label: "Certified coaches" },
+      { value: "24/7", label: "Gym access" },
+    ],
     features: [
       { title: "Group classes", body: "Strength, HIIT, and mobility every day." },
       { title: "Real coaching", body: "Certified coaches who know your name." },
       { title: "Flexible plans", body: "Month-to-month, cancel anytime." },
     ],
+    testimonial: { quote: "Best community I've ever trained with.", name: "Marcus T.", role: "Member" },
     theme: {
       bg: "#0f1115", surface: "#1a2028", primary: "#1f2933", primary2: "#0b0e12",
       accent: "#a6e22e", text: "#f2f5f0", muted: "#9aa3ad", font: "sans",
@@ -225,11 +252,17 @@ export const SAMPLE_SITES: SampleSite[] = [
       sub: "Weddings, portraits, and brand stories shot with natural light.",
       cta: "See the portfolio",
     },
+    stats: [
+      { value: "300+", label: "Shoots delivered" },
+      { value: "4.9★", label: "Client rating" },
+      { value: "48h", label: "Sneak peeks" },
+    ],
     features: [
       { title: "Signature style", body: "Timeless, warm, and true to life." },
       { title: "Full galleries", body: "High-resolution images, quickly delivered." },
       { title: "Custom packages", body: "Coverage tailored to your day." },
     ],
+    testimonial: { quote: "Our photos took our breath away.", name: "The Alvarez Family", role: "Wedding" },
     theme: {
       bg: "#ffffff", surface: "#f1f1f1", primary: "#141414", primary2: "#3a3a3a",
       accent: "#c9a227", text: "#141414", muted: "#6b6b6b", font: "sans",
@@ -247,14 +280,132 @@ export const SAMPLE_SITES: SampleSite[] = [
       sub: "Full-service landscaping for homes and small businesses.",
       cta: "Get a free quote",
     },
+    stats: [
+      { value: "500+", label: "Yards transformed" },
+      { value: "15yr", label: "In business" },
+      { value: "4.9★", label: "Homeowner rating" },
+    ],
     features: [
       { title: "Custom design", body: "Plans shaped around your yard and budget." },
       { title: "Reliable crews", body: "On time, tidy, and detail-obsessed." },
       { title: "Year-round care", body: "Seasonal maintenance that keeps it sharp." },
     ],
+    testimonial: { quote: "Our backyard is now our favorite room.", name: "Sam R.", role: "Homeowner" },
     theme: {
       bg: "#f4faf4", surface: "#e2f1e2", primary: "#2e7d32", primary2: "#4faf52",
       accent: "#b5892b", text: "#1c2b1c", muted: "#5e6f5e", font: "sans",
+    },
+  },
+  {
+    id: "realty",
+    name: "Cedar & Co Realty",
+    category: "Real Estate",
+    summary: "Polished and trust-building, with room for listings, neighborhoods, and agents.",
+    nav: ["Listings", "Buy", "Sell", "Contact"],
+    hero: {
+      eyebrow: "Local experts",
+      heading: "Find your next front door.",
+      sub: "Homes and honest guidance for buyers and sellers in your neighborhood.",
+      cta: "Browse listings",
+    },
+    stats: [
+      { value: "$120M+", label: "Homes sold" },
+      { value: "350+", label: "Families moved" },
+      { value: "14", label: "Avg. days to sell" },
+    ],
+    features: [
+      { title: "Curated listings", body: "Only the homes that fit what you want." },
+      { title: "Neighborhood insight", body: "Schools, commutes, and local know-how." },
+      { title: "Smooth closings", body: "Guided from first tour to keys in hand." },
+    ],
+    testimonial: { quote: "Sold above asking in a single week.", name: "The Bennetts", role: "Sellers" },
+    theme: {
+      bg: "#f7f9fc", surface: "#e8eef7", primary: "#14324f", primary2: "#24507a",
+      accent: "#c99a3a", text: "#16202e", muted: "#5b6675", font: "serif",
+    },
+  },
+  {
+    id: "boutique",
+    name: "Marlo Boutique",
+    category: "Retail & E-commerce",
+    summary: "Playful and product-forward, built to browse collections and drive sales.",
+    nav: ["Shop", "New In", "Lookbook", "Cart"],
+    hero: {
+      eyebrow: "New arrivals",
+      heading: "Style that's uniquely you.",
+      sub: "Curated apparel and accessories, refreshed every single week.",
+      cta: "Shop the collection",
+    },
+    stats: [
+      { value: "4.9★", label: "1k+ reviews" },
+      { value: "Free", label: "Shipping $50+" },
+      { value: "New", label: "Drops weekly" },
+    ],
+    features: [
+      { title: "Curated edits", body: "Handpicked pieces you won't find everywhere." },
+      { title: "Easy returns", body: "30-day, no-questions-asked returns." },
+      { title: "Member perks", body: "Early access and members-only pricing." },
+    ],
+    testimonial: { quote: "My new favorite place to shop.", name: "Ava L.", role: "Member" },
+    theme: {
+      bg: "#fff8f6", surface: "#ffe7e0", primary: "#c93f78", primary2: "#9c2f6e",
+      accent: "#f0a04b", text: "#3a222c", muted: "#8a6b73", font: "sans",
+    },
+  },
+  {
+    id: "dental",
+    name: "Bright Smile Dental",
+    category: "Dental & Medical",
+    summary: "Clean and calming, designed to build trust and make booking effortless.",
+    nav: ["Services", "New Patients", "Insurance", "Book"],
+    hero: {
+      eyebrow: "Gentle care",
+      heading: "A healthier, brighter smile.",
+      sub: "Modern, comfortable dentistry for the whole family.",
+      cta: "Book an appointment",
+    },
+    stats: [
+      { value: "4.9★", label: "Patient rating" },
+      { value: "20+", label: "Years caring" },
+      { value: "Same-day", label: "Appointments" },
+    ],
+    features: [
+      { title: "Same-day visits", body: "Emergencies and check-ups without the wait." },
+      { title: "Family friendly", body: "Care for every age, gently done." },
+      { title: "Most insurance", body: "We handle the paperwork for you." },
+    ],
+    testimonial: { quote: "Zero anxiety and a great result.", name: "Chris P.", role: "Patient" },
+    theme: {
+      bg: "#f3fbfb", surface: "#dff1f0", primary: "#0e7c86", primary2: "#12a3ad",
+      accent: "#f0a93b", text: "#14322f", muted: "#5c7573", font: "sans",
+    },
+  },
+  {
+    id: "agency",
+    name: "Northwind Studio",
+    category: "Creative Agency",
+    summary: "Modern and vibrant, made to showcase work and win new projects.",
+    nav: ["Work", "Services", "About", "Start"],
+    hero: {
+      eyebrow: "Brand & web",
+      heading: "Ideas that move brands forward.",
+      sub: "Design, web, and content for ambitious growing companies.",
+      cta: "Start a project",
+    },
+    stats: [
+      { value: "120+", label: "Projects shipped" },
+      { value: "4.9★", label: "Client rating" },
+      { value: "2x", label: "Avg. conversion lift" },
+    ],
+    features: [
+      { title: "Brand identity", body: "Logos, palettes, and systems that scale." },
+      { title: "Web design", body: "Fast, striking sites that convert." },
+      { title: "Content", body: "Words and visuals that tell your story." },
+    ],
+    testimonial: { quote: "They just get it — and delivered.", name: "Dana K.", role: "Founder" },
+    theme: {
+      bg: "#f7f7fb", surface: "#ececf6", primary: "#4b34d6", primary2: "#7b3ff2",
+      accent: "#12c7b8", text: "#16162a", muted: "#5c5c76", font: "sans",
     },
   },
 ];

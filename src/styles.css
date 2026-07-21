@@ -286,7 +286,17 @@ img { max-width: 100%; }
 .mock-h { font-size: clamp(1.2rem, 3.4vw, 1.5rem); font-weight: 800; line-height: 1.1; margin: 0 0 0.35rem; color: #fff; }
 .mock-sub { font-size: 0.8rem; line-height: 1.5; margin: 0 0 1rem; opacity: 0.92; max-width: 42ch; }
 .mock-btn { display: inline-block; font-weight: 800; font-size: 0.74rem; padding: 0.45rem 0.9rem; border-radius: 8px; }
+.mock-hero-actions { display: inline-flex; align-items: center; gap: 0.5rem; }
 .mock-hero .mock-btn { background: #fff; color: var(--t-primary); }
+.mock-btn.ghost { background: rgba(255, 255, 255, 0.14); color: #fff; border: 1px solid rgba(255, 255, 255, 0.55); }
+.mock-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; padding: 1.1rem 1.1rem 0; }
+.mock-stat { background: var(--t-surface); border: 1px solid rgba(128, 128, 128, 0.14); border-radius: 10px; padding: 0.55rem 0.5rem; text-align: center; }
+.mock-stat strong { display: block; font-size: 1.05rem; font-weight: 800; color: var(--t-text); line-height: 1.1; }
+.mock-stat span { font-size: 0.6rem; color: var(--t-muted); }
+.mock-quote { margin: 1.1rem; padding: 1rem 1.2rem; border-radius: 12px; background: var(--t-surface); border-left: 3px solid var(--t-accent); }
+.mock-quote blockquote { margin: 0 0 0.55rem; font-size: 0.9rem; font-style: italic; color: var(--t-text); line-height: 1.4; }
+.mock-quote figcaption { display: flex; align-items: center; gap: 0.55rem; font-size: 0.76rem; color: var(--t-text); }
+.mock-avatar { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--t-primary), var(--t-primary2)); color: #fff; font-weight: 800; font-size: 0.74rem; }
 .mock-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; padding: 1.1rem; }
 .mock-card { background: var(--t-surface); border: 1px solid rgba(128, 128, 128, 0.14); border-radius: 10px; padding: 0.8rem; display: grid; gap: 0.3rem; align-content: start; }
 .mock-card-icon { width: 22px; height: 22px; border-radius: 6px; background: var(--t-accent); opacity: 0.92; }
@@ -321,6 +331,55 @@ img { max-width: 100%; }
 .sample-modal-scroll { overflow-y: auto; padding: 1.25rem; background: var(--surface); }
 .sample-modal-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 1rem 1.1rem; border-top: 1px solid var(--border); }
 .sample-modal-foot span { color: var(--muted); font-size: 0.95rem; }
+
+/* ---- UI element showcase (Examples page) ---- */
+.ux-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 1.25rem; }
+.ux-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 0.85rem; transition: transform 0.18s, box-shadow 0.18s; }
+.ux-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.ux-label { font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.ux-demo { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 116px; background: var(--surface); border-radius: 12px; padding: 1rem; }
+
+.ux-announce { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; width: 100%; background: var(--grad-brand); color: #fff; border-radius: 10px; padding: 0.6rem 0.9rem; font-size: 0.82rem; font-weight: 600; }
+.ux-announce-link { font-weight: 800; white-space: nowrap; }
+
+.ux-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; width: 100%; }
+.ux-stats div { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.3rem; text-align: center; }
+.ux-stats strong { display: block; font-size: 1.2rem; font-weight: 800; color: var(--brand); }
+.ux-stats span { font-size: 0.62rem; color: var(--muted); }
+
+.ux-quote { margin: 0; width: 100%; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 10px; padding: 0.9rem 1rem; }
+.ux-quote blockquote { margin: 0 0 0.6rem; font-style: italic; font-size: 0.88rem; color: var(--text); }
+.ux-quote figcaption { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); }
+.ux-avatar { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--grad-brand); color: #fff; font-weight: 800; font-size: 0.75rem; }
+
+.ux-gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 34px; gap: 0.4rem; width: 100%; }
+.ux-tile { border-radius: 7px; }
+.ux-tile.t-0 { background: var(--grad-brand); }
+.ux-tile.t-1 { background: #fff; border: 1px solid var(--border); }
+.ux-tile.t-2 { background: #d9f6f2; }
+
+.ux-pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; width: 100%; align-items: end; }
+.ux-plan { position: relative; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 0.4rem; text-align: center; display: grid; gap: 0.3rem; }
+.ux-plan.featured { border-color: var(--brand); box-shadow: var(--shadow-sm); padding-top: 1.15rem; }
+.ux-plan-badge { position: absolute; top: -0.55rem; left: 50%; transform: translateX(-50%); background: var(--brand); color: #fff; font-size: 0.56rem; font-weight: 800; padding: 0.12rem 0.45rem; border-radius: 999px; text-transform: uppercase; white-space: nowrap; }
+.ux-plan-name { font-size: 0.72rem; font-weight: 700; color: var(--muted); }
+.ux-plan-price { font-size: 1.2rem; font-weight: 800; color: var(--brand); letter-spacing: 0.06em; }
+
+.ux-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: center; }
+.ux-btn { font-size: 0.76rem; font-weight: 800; padding: 0.5rem 0.9rem; border-radius: 9px; }
+.ux-btn.primary { background: var(--brand); color: #fff; box-shadow: 0 6px 14px rgba(34, 88, 255, 0.25); }
+.ux-btn.ghost { background: #fff; color: var(--brand); border: 1px solid var(--border-strong); }
+.ux-btn.block { display: block; text-align: center; }
+.ux-badge { font-size: 0.66rem; font-weight: 800; padding: 0.2rem 0.55rem; border-radius: 999px; background: var(--surface-2); color: var(--brand); }
+.ux-badge.alt { background: #ffe9d6; color: #b4560f; }
+
+.ux-form { display: grid; gap: 0.5rem; width: 100%; }
+.ux-input { height: 30px; background: #fff; border: 1px solid var(--border-strong); border-radius: 8px; }
+
+.ux-feats { display: grid; gap: 0.5rem; width: 100%; }
+.ux-feat { display: flex; align-items: center; gap: 0.55rem; font-size: 0.84rem; font-weight: 600; color: var(--text); }
+.ux-dot { width: 20px; height: 20px; border-radius: 6px; background: #e6ecff; position: relative; flex: 0 0 auto; }
+.ux-dot::after { content: "✓"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--brand); font-size: 0.72rem; font-weight: 900; }
 
 /* tablet: stack the hero, keep the visual centered and contained */
 @media (max-width: 860px) {

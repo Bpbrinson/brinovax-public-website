@@ -16,9 +16,10 @@ function themeStyle(t: SampleTheme): CSSProperties {
 }
 
 /* A self-contained, themed mock of a small-business site — pure CSS/markup, no
-   external assets. `full` adds the extra sections shown in the modal. */
+   external assets. `full` adds the extra sections shown in the modal so visitors
+   see the range of UI elements we can build (stats, gallery, testimonial, CTA). */
 function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean }) {
-  const { hero, features, nav, name, summary } = sample;
+  const { hero, features, nav, name, summary, stats, testimonial } = sample;
   return (
     <div className="mock" style={themeStyle(sample.theme)} data-variant={full ? "full" : "preview"}>
       <div className="mock-topbar">
@@ -34,7 +35,19 @@ function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean
         <span className="mock-eyebrow">{hero.eyebrow}</span>
         <p className="mock-h">{hero.heading}</p>
         <p className="mock-sub">{hero.sub}</p>
-        <span className="mock-btn">{hero.cta}</span>
+        <span className="mock-hero-actions">
+          <span className="mock-btn">{hero.cta}</span>
+          <span className="mock-btn ghost">{nav[0]}</span>
+        </span>
+      </div>
+
+      <div className="mock-stats" aria-hidden="true">
+        {stats.map((s) => (
+          <div key={s.label} className="mock-stat">
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </div>
+        ))}
       </div>
 
       {full && (
@@ -66,13 +79,28 @@ function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean
       </div>
 
       {full && (
-        <div className="mock-cta">
-          <div>
-            <strong>{hero.heading}</strong>
-            <span className="mock-body">Ready when you are.</span>
+        <>
+          <figure className="mock-quote">
+            <blockquote>“{testimonial.quote}”</blockquote>
+            <figcaption>
+              <span className="mock-avatar" aria-hidden="true">
+                {testimonial.name.charAt(0)}
+              </span>
+              <span>
+                <strong>{testimonial.name}</strong>
+                {testimonial.role && <span className="mock-body"> · {testimonial.role}</span>}
+              </span>
+            </figcaption>
+          </figure>
+
+          <div className="mock-cta">
+            <div>
+              <strong>{hero.heading}</strong>
+              <span className="mock-body">Ready when you are.</span>
+            </div>
+            <span className="mock-btn">{nav[nav.length - 1]}</span>
           </div>
-          <span className="mock-btn">{nav[nav.length - 1]}</span>
-        </div>
+        </>
       )}
 
       <div className="mock-footer" aria-hidden="true">

@@ -26,6 +26,13 @@ describe("App routing", () => {
     expect(screen.getByRole("heading", { name: "Custom Build" })).toBeInTheDocument();
   });
 
+  it("renders the examples page with the elements showcase", () => {
+    renderAt("/examples");
+    expect(
+      screen.getByRole("heading", { name: /elements that make sites pop/i }),
+    ).toBeInTheDocument();
+  });
+
   it("shows a not-found page for unknown routes", () => {
     renderAt("/does-not-exist");
     expect(screen.getByRole("heading", { name: /couldn.t find that page/i })).toBeInTheDocument();

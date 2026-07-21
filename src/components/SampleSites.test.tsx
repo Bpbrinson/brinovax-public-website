@@ -23,7 +23,7 @@ describe("sample-site carousel", () => {
     const user = userEvent.setup();
     renderIt();
     await user.click(screen.getByRole("button", { name: /previous design/i }));
-    expect(screen.getAllByText("GreenScape").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Northwind Studio").length).toBeGreaterThan(0);
   });
 
   it("opens a click-through preview modal and closes it on Escape", async () => {
