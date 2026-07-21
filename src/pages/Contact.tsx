@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { CONTACT_EMAIL, CONTACT_ENDPOINT } from "../data/site";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { useSeo } from "../hooks/usePageTitle";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -49,7 +49,11 @@ export function buildMailto(values: ContactValues): string {
 }
 
 export default function Contact() {
-  usePageTitle("Contact");
+  useSeo({
+    title: "Contact",
+    description:
+      "Tell us about your business and get a free, no-obligation quote for an affordable, professionally hosted website. Reach Brinovax at bpbrinson@brinovax.com.",
+  });
   const [values, setValues] = useState<ContactValues>({ name: "", email: "", phone: "", message: "" });
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<Errors>({});

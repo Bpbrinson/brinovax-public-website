@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import SampleSites from "../components/SampleSites";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { useSeo } from "../hooks/usePageTitle";
 
 /* A labeled demo of a reusable UI building block, shown in Brinovax's own brand
    colors so visitors can see the menu of elements we can add to their site. */
@@ -15,7 +15,11 @@ function Element({ label, children }: { label: string; children: ReactNode }) {
 }
 
 export default function Examples() {
-  usePageTitle("Examples & design ideas");
+  useSeo({
+    title: "Examples & design ideas",
+    description:
+      "Browse example website designs across industries — cafés, salons, law, fitness, photography, real estate, retail, dental, and more — plus the UI elements we can build for you.",
+  });
   return (
     <>
       <section className="container section narrow">

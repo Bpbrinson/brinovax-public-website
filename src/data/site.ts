@@ -103,6 +103,31 @@ export const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT ?? DEFAULT
 // Sample designs shown in the "design ideas" carousel. Each is a self-contained
 // theme (no external assets) rendered as a mini mock site the visitor can click
 // through for inspiration. Stats, quotes, and prices are illustrative placeholders.
+// Common questions. Rendered on the site AND mirrored as FAQ structured data in
+// index.html — keep the two in sync so the rich result matches the page.
+export const FAQS = [
+  {
+    q: "How much does a Brinovax website cost?",
+    a: "Pricing is built for small businesses and depends on your plan and scope. Starter hosting is our most affordable tier; custom builds are quoted per project. Reach out and we'll give you an honest, plain-English quote — there's no cost to ask.",
+  },
+  {
+    q: "How long does it take to launch?",
+    a: "Most small-business sites go from intake to a live, approved site in a couple of weeks — it depends mostly on how quickly content and approvals come together. You review a private preview before anything goes live.",
+  },
+  {
+    q: "Do I own my website and domain?",
+    a: "Yes. You keep ownership of your domain and content. We manage the hosting and deployment; you approve every change.",
+  },
+  {
+    q: "Can I make changes after it launches?",
+    a: "Absolutely. Request content edits within your plan — our AI drafts them fast, and nothing goes live until you review and approve. Every change is previewed and reversible.",
+  },
+  {
+    q: "Is my site secure and reliable?",
+    a: "Every site runs on AWS with HTTPS, private storage behind a global CDN, health checks, and documented rollback — enterprise-grade foundations without the enterprise bill.",
+  },
+];
+
 export interface SampleTheme {
   bg: string;
   surface: string;

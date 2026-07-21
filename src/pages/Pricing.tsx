@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { TIERS } from "../data/site";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { useSeo } from "../hooks/usePageTitle";
 
 export default function Pricing() {
-  usePageTitle("Pricing");
+  useSeo({
+    title: "Pricing",
+    description:
+      "Simple, affordable website hosting plans for small businesses — Starter, Managed, and Custom Build. Final pricing and edit allowances confirmed during onboarding.",
+  });
   return (
     <section className="container section">
       <p className="eyebrow">Pricing</p>

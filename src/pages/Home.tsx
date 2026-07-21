@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { STEPS } from "../data/site";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { useSeo } from "../hooks/usePageTitle";
 import SampleSites from "../components/SampleSites";
+import Reveal from "../components/Reveal";
+import Faq from "../components/Faq";
 
 /* Small inline stroke icons — no external assets, crisp on every screen. */
 const icon = {
@@ -58,6 +60,17 @@ const icon = {
   ),
 };
 
+const INDUSTRIES = [
+  "Cafés & restaurants",
+  "Salons & beauty",
+  "Trades & home services",
+  "Fitness & wellness",
+  "Professional services",
+  "Retail & boutiques",
+  "Real estate",
+  "Creative studios",
+];
+
 function Feature({ svg, title, children }: { svg: ReactNode; title: string; children: ReactNode }) {
   return (
     <article className="feature">
@@ -81,10 +94,19 @@ function Value({ svg, title, children }: { svg: ReactNode; title: string; childr
 }
 
 export default function Home() {
-  usePageTitle("Affordable, managed website hosting");
+  useSeo({
+    title: "Affordable, managed website hosting",
+    description:
+      "Brinovax builds fast, secure websites for small businesses and hosts them on AWS — HTTPS, a custom domain, AI-assisted edits, and honest, affordable pricing. Get a free quote.",
+  });
   return (
     <>
       <section className="hero">
+        <div className="hero-aurora" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">Affordable managed website hosting</p>
@@ -95,10 +117,10 @@ export default function Home() {
               and our AI helps make edits fast while you stay in control.
             </p>
             <div className="cta-row">
-              <Link className="btn btn-primary" to="/contact">
-                Get started
+              <Link className="btn btn-primary btn-lg" to="/contact">
+                Get a free quote
               </Link>
-              <a className="btn btn-ghost" href="#ideas">
+              <a className="btn btn-ghost btn-lg" href="#ideas">
                 Browse design ideas
               </a>
             </div>
@@ -135,15 +157,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container section">
-        <div className="section-head">
-          <h2 className="section-title">Everything a small business needs to be online</h2>
-          <p className="section-sub">
-            Professional hosting without the cloud complexity — set up for you and kept
-            running behind the scenes, for a price that fits a small-business budget.
-          </p>
+      <section className="trust-strip" aria-label="Industries we build for">
+        <div className="container">
+          <p className="trust-label">Websites for every kind of small business</p>
+          <div className="trust-track">
+            {INDUSTRIES.map((i) => (
+              <Link key={i} to="/examples" className="trust-chip">
+                {i}
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="feature-grid">
+      </section>
+
+      <section className="container section">
+        <Reveal>
+          <div className="section-head">
+            <h2 className="section-title">Everything a small business needs to be online</h2>
+            <p className="section-sub">
+              Professional hosting without the cloud complexity — set up for you and kept
+              running behind the scenes, for a price that fits a small-business budget.
+            </p>
+          </div>
+        </Reveal>
+        <Reveal className="feature-grid">
           <Feature svg={icon.bolt} title="Fast by default">
             Static delivery from a global CDN means your pages load quickly for visitors
             anywhere, with automatic HTTPS.
@@ -156,17 +193,19 @@ export default function Home() {
             Every change is previewed on a development URL and health-checked before it is
             promoted to production.
           </Feature>
-        </div>
+        </Reveal>
       </section>
 
       <SampleSites />
 
       <section className="container section">
-        <div className="section-head">
-          <h2 className="section-title">Why small businesses choose Brinovax</h2>
-          <p className="section-sub">Enterprise-grade foundations, priced for small teams.</p>
-        </div>
-        <div className="value-grid">
+        <Reveal>
+          <div className="section-head">
+            <h2 className="section-title">Why small businesses choose Brinovax</h2>
+            <p className="section-sub">Enterprise-grade foundations, priced for small teams.</p>
+          </div>
+        </Reveal>
+        <Reveal className="value-grid">
           <Value svg={icon.tag} title="Genuinely affordable">
             Small-business pricing with no surprise fees — enterprise-grade hosting without
             the enterprise bill.
@@ -183,35 +222,68 @@ export default function Home() {
             Versioned deploys with health checks watching your site, so we can roll back to
             the last approved version anytime.
           </Value>
+        </Reveal>
+      </section>
+
+      <section className="container section">
+        <Reveal>
+          <div className="section-head">
+            <h2 className="section-title">From intake to launch</h2>
+            <p className="section-sub">A calm, reviewable path from idea to a live site.</p>
+          </div>
+        </Reveal>
+        <Reveal>
+          <ol className="steps">
+            {STEPS.map((step, i) => (
+              <li key={step.title} className="step">
+                <span className="step-num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+      </section>
+
+      <section className="band">
+        <div className="container section narrow">
+          <Reveal>
+            <div className="section-head center" style={{ marginInline: "auto" }}>
+              <h2 className="section-title">Frequently asked questions</h2>
+              <p className="section-sub">Everything you need to know before reaching out.</p>
+            </div>
+          </Reveal>
+          <Reveal>
+            <Faq />
+          </Reveal>
         </div>
       </section>
 
       <section className="container section">
-        <div className="section-head">
-          <h2 className="section-title">From intake to launch</h2>
-          <p className="section-sub">A calm, reviewable path from idea to a live site.</p>
-        </div>
-        <ol className="steps">
-          {STEPS.map((step, i) => (
-            <li key={step.title} className="step">
-              <span className="step-num" aria-hidden="true">
-                {i + 1}
-              </span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
+        <Reveal>
+          <div className="final-cta">
+            <div className="final-cta-glow" aria-hidden="true" />
+            <div className="final-cta-inner">
+              <h2>Ready to get your business online?</h2>
+              <p>
+                Tell us about your business and we&apos;ll send back a design direction and an
+                honest, highly affordable quote — no cost, no obligation.
+              </p>
+              <div className="cta-row">
+                <Link className="btn btn-primary btn-lg" to="/contact">
+                  Get a free quote
+                </Link>
+                <Link className="btn btn-ghost btn-lg on-dark" to="/pricing">
+                  View plans
+                </Link>
               </div>
-            </li>
-          ))}
-        </ol>
-        <div className="cta-row">
-          <Link className="btn btn-primary" to="/pricing">
-            View plans
-          </Link>
-          <Link className="btn btn-ghost" to="/contact">
-            Get a free quote
-          </Link>
-        </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
     </>
   );

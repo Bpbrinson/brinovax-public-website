@@ -1,8 +1,12 @@
 import { BRINOVAX_RESPONSIBILITIES, CUSTOMER_RESPONSIBILITIES } from "../data/site";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { useSeo } from "../hooks/usePageTitle";
 
 export default function About() {
-  usePageTitle("About");
+  useSeo({
+    title: "About",
+    description:
+      "Brinovax gives small businesses a professional web presence without the overhead of managing cloud infrastructure — hosting, security, deployments, and monitoring, handled.",
+  });
   return (
     <section className="container section">
       <p className="eyebrow">About</p>

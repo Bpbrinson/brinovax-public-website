@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { useSeo } from "../hooks/usePageTitle";
 
 export default function NotFound() {
-  usePageTitle("Page not found");
+  useSeo({
+    title: "Page not found",
+    description: "The page you were looking for may have moved. Head back to the Brinovax home page.",
+  });
   return (
     <section className="container section narrow center">
       <p className="eyebrow">404</p>

@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { STEPS } from "../data/site";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { useSeo } from "../hooks/usePageTitle";
 
 export default function HowItWorks() {
-  usePageTitle("How it works");
+  useSeo({
+    title: "How it works",
+    description:
+      "How Brinovax builds and launches your website: structured intake, a private preview you approve, a global-CDN production launch, and reversible ongoing edits.",
+  });
   return (
     <section className="container section">
       <p className="eyebrow">How it works</p>
