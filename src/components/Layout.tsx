@@ -1,6 +1,31 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import { NAV } from "../data/site";
+import { useTheme } from "../hooks/useTheme";
+
+function ThemeToggle() {
+  const { theme, toggle } = useTheme();
+  const dark = theme === "dark";
+  return (
+    <button
+      className="theme-toggle"
+      onClick={toggle}
+      aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+      title={dark ? "Switch to light theme" : "Switch to dark theme"}
+    >
+      {dark ? (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+        </svg>
+      )}
+    </button>
+  );
+}
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -32,35 +57,38 @@ export default function Layout({ children }: { children: ReactNode }) {
             </span>
             Brinovax
           </NavLink>
-          <button
-            className="nav-toggle"
-            aria-expanded={open}
-            aria-controls="primary-nav"
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span className="sr-only">Toggle navigation</span>
-            ☰
-          </button>
-          <nav
-            id="primary-nav"
-            className={open ? "site-nav open" : "site-nav"}
-            aria-label="Primary"
-          >
-            {NAV.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === "/"}
-                onClick={() => setOpen(false)}
-                className={({ isActive }) => (isActive ? "active" : undefined)}
-              >
-                {item.label}
+          <div className="header-right">
+            <nav
+              id="primary-nav"
+              className={open ? "site-nav open" : "site-nav"}
+              aria-label="Primary"
+            >
+              {NAV.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.to === "/"}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) => (isActive ? "active" : undefined)}
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+              <NavLink to="/contact" className="nav-cta" onClick={() => setOpen(false)}>
+                Get a quote
               </NavLink>
-            ))}
-            <NavLink to="/contact" className="nav-cta" onClick={() => setOpen(false)}>
-              Get a quote
-            </NavLink>
-          </nav>
+            </nav>
+            <ThemeToggle />
+            <button
+              className="nav-toggle"
+              aria-expanded={open}
+              aria-controls="primary-nav"
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span className="sr-only">Toggle navigation</span>
+              ☰
+            </button>
+          </div>
         </div>
       </header>
 

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import SampleSites from "../components/SampleSites";
+import ThemeStudio from "../components/ThemeStudio";
 import { useSeo } from "../hooks/usePageTitle";
 
 /* A labeled demo of a reusable UI building block, shown in Brinovax's own brand
@@ -33,6 +34,8 @@ export default function Examples() {
       </section>
 
       <SampleSites />
+
+      <ThemeStudio />
 
       <section className="container section">
         <div className="section-head">

@@ -8,6 +8,17 @@
     <meta name="theme-color" content="#2258ff" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
+    <!-- Apply the saved (or OS-preferred) theme before first paint to avoid a flash. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("brinovax-theme");
+          var theme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.dataset.theme = theme;
+        } catch (e) {}
+      })();
+    </script>
+
     <title>Affordable, managed website hosting for small businesses · Brinovax</title>
     <meta
       name="description"

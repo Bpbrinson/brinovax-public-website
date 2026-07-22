@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { STEPS } from "../data/site";
 import { useSeo } from "../hooks/usePageTitle";
 import SampleSites from "../components/SampleSites";
+import ThemeStudio from "../components/ThemeStudio";
+import Stats from "../components/Stats";
 import Reveal from "../components/Reveal";
 import Faq from "../components/Faq";
 
@@ -196,7 +198,11 @@ export default function Home() {
         </Reveal>
       </section>
 
+      <Stats />
+
       <SampleSites />
+
+      <ThemeStudio />
 
       <section className="container section">
         <Reveal>

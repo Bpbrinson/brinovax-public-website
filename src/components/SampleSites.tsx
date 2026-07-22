@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, type CSSProperties, type ReactNode } 
 import { Link } from "react-router-dom";
 import { SAMPLE_SITES, type SampleSite, type SampleTheme } from "../data/site";
 
-function themeStyle(t: SampleTheme): CSSProperties {
+export function themeStyle(t: SampleTheme): CSSProperties {
   return {
     "--t-bg": t.bg,
     "--t-surface": t.surface,
@@ -307,7 +307,7 @@ function HeroPortfolio({ sample }: { sample: SampleSite }) {
 
 /* A themed mock site with a layout-specific structure so the designs don't all look
    alike. Pure CSS/SVG, no external assets. `full` adds the modal-only sections. */
-function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean }) {
+export function SiteMock({ sample, full = false }: { sample: SampleSite; full?: boolean }) {
   const { layout } = sample;
   return (
     <div
