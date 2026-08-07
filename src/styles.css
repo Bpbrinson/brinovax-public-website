@@ -135,6 +135,11 @@ textarea:focus-visible,
 .site-nav a.active { color: var(--brand); background: var(--surface-2); }
 .nav-cta { color: #fff !important; background: var(--brand); padding: 0.5rem 1rem !important; }
 .nav-cta:hover { background: var(--brand-dark) !important; }
+/* On the page the CTA links to (Contact), react-router marks it .active, and
+   .site-nav a.active (higher specificity) would otherwise wash out its blue. Keep
+   the CTA solid blue on that page too, dark blue on hover — matching every other page. */
+.site-nav a.nav-cta.active { color: #fff; background: var(--brand); }
+.site-nav a.nav-cta.active:hover { background: var(--brand-dark); }
 .nav-toggle { display: none; background: none; border: 1px solid var(--border-strong); border-radius: 8px; font-size: 1.2rem; padding: 0.3rem 0.6rem; cursor: pointer; }
 
 /* hero */
