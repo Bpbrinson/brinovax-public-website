@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { NAV } from "../data/site";
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -7,6 +7,14 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   const [showTop, setShowTop] = useState(false);
   const year = new Date().getFullYear();
+  const { pathname } = useLocation();
+
+  // Every time the route changes (i.e. a nav link is followed), jump the viewport
+  // back to the very top of the new page instead of preserving the old scroll
+  // position.
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => {
