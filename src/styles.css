@@ -22,3 +22,17 @@ body {
   max-width: 600px;
   line-height: 1.5;
 }
+
+/* "Get a quote" call-to-action in the primary nav (shown on every page,
+   including Contact) — blue background, darker blue on hover/focus to match
+   the site's link color treatment. */
+.site-nav .nav-cta {
+  background-color: #2563eb;
+  color: #ffffff;
+  transition: background-color 0.2s ease;
+}
+
+.site-nav .nav-cta:hover,
+.site-nav .nav-cta:focus-visible {
+  background-color: #1d4ed8;
+}
